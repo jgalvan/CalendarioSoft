@@ -1,0 +1,2 @@
+class Participante < Usuario
+end
