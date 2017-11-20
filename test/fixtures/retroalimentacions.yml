@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  comentarios: MyString
+  participante: one
+  evento: one
+
+two:
+  comentarios: MyString
+  participante: two
+  evento: two

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fecha: 
+  hora: 
+  nombre: MyString
+  lugar: MyString
+  maxParticipantes: 
+  descripcion: MyString
+  administrador: one
+
+two:
+  fecha: 
+  hora: 
+  nombre: MyString
+  lugar: MyString
+  maxParticipantes: 
+  descripcion: MyString
+  administrador: two
