@@ -1,17 +1,32 @@
-<h2>Log in</h2>
+<div class="modal-dialog">
+				<div class="loginmodal-container">
+					<h1>¡Inicia sesión!</h1><br>
 
-<%= form_tag iniciar_sesion_path, method: :post %>
-  <div class="field">
-    <%= label_tag :email %><br/>
-    <%= email_field_tag :email, nil, autofocus: true %>
-  </div>
+                    <%= form_tag iniciar_sesion_path, method: :post %>
+                    <div class="field">
+                        <%= text_field_tag :email, nil, placeholder: "Email", autofocus: true %>
+                    </div>
 
-  <div class="field">
-    <%= label_tag :contrasena, "Contraseña" %><br/>
-    <%= password_field_tag :contrasena, nil, autocomplete: "off" %>
-  </div>
+                    <div class="field">
+                        <%= password_field_tag :contrasena, nil, placeholder: "Contraseña", autocomplete: "off" %>
+                    </div>
 
 
-  <div class="actions">
-    <%= submit_tag "Log in" %>
-  </div>
+                    <div class="actions">
+                        <%= submit_tag "Log in", class:"login loginmodal-submit" %>
+                    </div>
+					
+				  <div class="login-help">
+					<%= link_to "Regístrate", new_usuario_path %>
+				  </div>
+				</div>
+			</div>
+
+			<style>
+			body{
+  background-image: url('https://static.pexels.com/photos/5156/people-eiffel-tower-lights-night.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+</style>
