@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+        <div class='col-xs-6 col-xs-offset-3'>
+          <div class="form-group">
+            <label>Evento</label>
+            <p><%=@evento.nombre%></p>
+          </div>
+
+          <div class="form-group">
+            <label>Lugar</label>
+            <p><%=@evento.lugar%></p>
+          </div>
+
+          <div class="form-group">
+            <label>Descripción</label>
+            <p><%=@evento.descripcion %></p>
+          </div>
+
+          <div class="form-group">
+            <label>Fecha de inicio</label>
+            <p><%=l @evento.fechaInicio, format: :long%></p>
+          </div>
+
+          <div class="form-group">
+            <label>Fecha de fin</label>
+            <p><%=l @evento.fechaFin, format: :long%></p>
+          </div>
+
+          <div class="form-group">
+            <label>Lugares disponibles</label>
+            <p><%= @evento.maxParticipantes %></p>
+          </div>
+
+          <%= link_to "Inscribirme", "/" %>
+            
+        </div>
+    </div>
+</div>

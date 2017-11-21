@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="row">
+        <div class='col-xs-6 col-xs-offset-3'>
+          <%= form_for(@evento) do |f| %>
+            <div class="form-group">
+              <%= f.label :nombre %>
+              <%= f.text_field :nombre, placeholder: "Nombre", autofocus: true, class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :lugar %>
+              <%= f.text_field :lugar, placeholder: "Sala mayor", class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :maxParticipantes, "Capacidad de participantes" %>
+              <%= f.text_field :maxParticipantes, placeholder: "100", class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :descripcion, "Descripción" %>
+              <%= f.text_area :descripcion, placeholder: "Descripción", class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+                <%= f.label :fechaInicio, "Fecha de inicio" %>    
+                <div class='input-group date' id='datetimepicker1'>
+                    <%= f.text_field :fechaInicio, class: "form-control" %>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+              <%= f.label :fechaFin, "Fecha de fin" %>  
+                <div class='input-group date' id='datetimepicker2'>
+                    <%= f.text_field :fechaFin, class: "form-control" %>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div></br>
+            </div>
+            
+            <%= f.submit "Submit", class: "btn btn-default"%>
+          <% end %>
+          
+
+            
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker({
+                  locale: 'es',
+                  format: 'YYYY/MM/DD HH:mma'
+                  });
+
+                $('#datetimepicker2').datetimepicker({
+                  locale: 'es',
+                  format: 'YYYY/MM/DD HH:mma'
+                  });
+            });
+        </script>
+    </div>
+</div>

@@ -3,7 +3,7 @@
 
   <% eventos.each do |evento| %>
     <div>
-      <%= evento.nombre %>
+      <%= link_to evento.nombre, evento_path(evento) %>
     </div>
   <% end %>
 <% end %>

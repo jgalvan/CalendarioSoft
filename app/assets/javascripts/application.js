@@ -11,5 +11,10 @@
 // about supported directives.
 //
 //= require rails-ujs
+//= require jquery
+//= require bootstrap-sprockets
+//= require moment
+//= require bootstrap-datetimepicker
+//= require moment/es.js
 //= require turbolinks
 //= require_tree .

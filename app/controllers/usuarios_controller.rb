@@ -1,5 +1,6 @@
 class UsuariosController < ApplicationController
     def login
+        reset_session
     end
 
     def iniciar_sesion
