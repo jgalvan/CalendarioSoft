@@ -10,11 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171120235219) do
+ActiveRecord::Schema.define(version: 20171121000329) do
 
   create_table "eventos", force: :cascade do |t|
-    t.date "fecha"
-    t.time "hora"
     t.string "nombre"
     t.string "lugar"
     t.integer "maxParticipantes"
@@ -22,6 +20,8 @@ ActiveRecord::Schema.define(version: 20171120235219) do
     t.integer "administrador_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "fechaInicio"
+    t.datetime "fechaFin"
     t.index ["administrador_id"], name: "index_eventos_on_administrador_id"
   end
 
