@@ -1,0 +1,9 @@
+<%= month_calendar attribute: :fechaInicio, end_attribute: :fechaFin, events: @eventos do |date, eventos| %>
+  <%= date.day %>
+
+  <% eventos.each do |evento| %>
+    <div>
+      <%= evento.nombre %>
+    </div>
+  <% end %>
+<% end %>
