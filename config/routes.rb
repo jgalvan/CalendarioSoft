@@ -4,4 +4,5 @@ Rails.application.routes.draw do
 
   get '/login', to: 'usuarios#login', as: 'login'
   post '/iniciar_sesion', to: 'usuarios#iniciar_sesion', as: 'iniciar_sesion'
+  post '/logout', to: 'usuarios#logout', as: 'logout'
 end
