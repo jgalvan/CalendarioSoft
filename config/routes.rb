@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     post :inscribir, on: :member
   end
 
+  root 'usuarios#login'
 
   get '/login', to: 'usuarios#login', as: 'login'
   post '/iniciar_sesion', to: 'usuarios#iniciar_sesion', as: 'iniciar_sesion'

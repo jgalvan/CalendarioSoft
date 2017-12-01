@@ -1,6 +1,5 @@
 class UsuariosController < ApplicationController
     def login
-        reset_session
     end
 
     def iniciar_sesion
@@ -17,6 +16,7 @@ class UsuariosController < ApplicationController
 
     def logout
         reset_session
+        redirect_to login_path
     end
 
     def new

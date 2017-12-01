@@ -27,15 +27,25 @@
           </div>
 
           <div class="form-group">
+            <label>Capacidad de capacitantes</label>
+            <p><%= @evento.maxParticipantes %></p>
+          </div>
+
+          <div class="form-group">
             <label>Lugares disponibles</label>
             <p><%= @evento.lugares_disponibles %></p>
           </div>
 
-          <% if @evento.participantes.include?(@usuario_actual) %>
-            <p>¡Ya estás inscrito!</p>
-          <% elsif @evento.lugares_disponibles > 0 %>
-            <%= link_to "Inscribirme", inscribir_evento_path(@evento), method: :post %>
-          <% end%>
+          <% if @usuario_actual.type != "Administrador" %>
+            <% if @evento.participantes.include?(@usuario_actual) %>
+              <p>¡Ya estás inscrito!</p>
+            <% elsif @evento.lugares_disponibles > 0 %>
+              <%= link_to "Inscribirme", inscribir_evento_path(@evento), method: :post %>
+            <% end%>
+          <% else %>
+            <%= link_to "Editar", edit_evento_path(@evento) %>
+          <% end %>
+          
           
           <%= link_to "Regresar", eventos_path %>
         </div>

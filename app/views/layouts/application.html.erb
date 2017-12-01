@@ -9,6 +9,48 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <% if @usuario_actual %>
+            <%= link_to "CalendarioSoft", eventos_path, class: "navbar-brand" %>
+          <% else %>
+            <%= link_to "CalendarioSoft", root_path, class: "navbar-brand" %>
+          <% end %>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <% if @usuario_actual %>
+            <li>
+              <%= link_to new_evento_path  do %>
+                <span class="glyphicon glyphicon-plus"></span> Agregar evento
+              <% end %>
+            </li>
+            <li>
+              <%= link_to eventos_path  do %>
+                <span class="glyphicon glyphicon-calendar"></span> Calendario
+              <% end %>
+            </li>
+            <li>
+              <%= link_to logout_path, method: :post do %>
+                <span class="glyphicon glyphicon-log-out"></span> Log out
+              <% end %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to new_usuario_path do %>
+                <span class="glyphicon glyphicon-user"></span> Registrarse
+              <% end %>
+            </li>
+            <li>
+              <%= link_to login_path do %>
+                <span class="glyphicon glyphicon-log-in"></span> Login
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+    </br>
     <%= yield %>
   </body>
 </html>

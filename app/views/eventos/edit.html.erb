@@ -48,11 +48,11 @@
                 </div></br>
             </div>
             
-            <%= f.submit "Guardar", class: "btn btn-primary", data: { confirm: "¿Guardar modificaciones?" } %></br>
+            <%= f.submit "Guardar", class: "btn btn-primary", data: { confirm: "¿Guardar modificaciones?" } %></br></br>
           <% end %>
           
-            <%= button_to "Cancelar", eventos_path, method: :get, class: "btn" %>
-            <%= button_to "Eliminar", evento_path(@evento), method: :delete, data: { confirm: "¿Estás seguro que lo quieres eliminar?" }, class: "btn btn-danger"  %>
+            <%= button_to "Cancelar", evento_path(@evento), method: :get, class: "btn" %></br>
+            <%= button_to "Eliminar", evento_path(@evento), method: :delete, data: { confirm: "¿Estás seguro que lo quieres eliminar?" }, class: "btn btn-danger"  %></br>
             
         </div>
         <script type="text/javascript">

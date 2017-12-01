@@ -1,13 +1,12 @@
-<% if @usuario_actual.try(:type) == "Administrador" %>
-  <%= link_to "Agregar evento", new_evento_path, class: "btn btn-primary" %>
-<% end %>
+</br>
+<div class="container">
+  <%= month_calendar attribute: :fechaInicio, end_attribute: :fechaFin, events: @eventos do |date, eventos| %>
+    <%= date.day %>
 
-<%= month_calendar attribute: :fechaInicio, end_attribute: :fechaFin, events: @eventos do |date, eventos| %>
-  <%= date.day %>
-
-  <% eventos.each do |evento| %>
-    <div>
-      <%= link_to evento.nombre, evento_path(evento) %>
-    </div>
+    <% eventos.each do |evento| %>
+      <div>
+        <%= link_to evento.nombre, evento_path(evento) %>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
+</div>

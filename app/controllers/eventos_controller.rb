@@ -1,76 +1,68 @@
 class EventosController < ApplicationController
-    def index
-        @eventos = Evento.all
-        @usuario_actual = Usuario.find_by_id(session[:id_usuario_actual])
+  before_action :autenticar_usuario
+  before_action :autorizar_administrador, except: [:index, :show, :inscribir]
+
+  def index
+    @eventos = Evento.all
+  end
+
+  def show
+    @evento = Evento.find_by_id(params[:id])
+  end
+
+  def new
+    @evento = Evento.new
+    @evento.administrador = @usuario_actual
+  end
+
+  def create
+    @evento = Evento.new(evento_params)
+    @evento.administrador = @usuario_actual
+    if @evento.save
+      redirect_to eventos_path
+    else
+      render 'new'
+    end
+  end
+
+  def edit
+    @evento = Evento.find_by_id(params[:id])
+  end
+
+  def update
+    @evento = Evento.find_by_id(params[:id])
+    if @evento.update_attributes(evento_params)
+      redirect_to evento_path(@evento)
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    evento = Evento.find_by_id(params[:id])
+    evento.destroy
+    redirect_to eventos_path
+  end
+
+  def inscribir
+    evento = Evento.find_by_id(params[:id])
+    if @usuario_actual.type == 'Participante' && evento && evento.lugares_disponibles > 0
+      evento.participantes << @usuario_actual
+    end
+    redirect_to evento_path(evento)
+  end
+
+  private
+    def evento_params
+      params.require(:evento).permit(:nombre, :lugar, :maxParticipantes, :fechaInicio, :fechaFin, :descripcion)
     end
 
-    def show
-        @usuario_actual = Usuario.find_by_id(session[:id_usuario_actual])
-        if @usuario_actual.type == "Administrador"
-            redirect_to edit_evento_path(params[:id])
-        else
-            @evento = Evento.find_by_id(params[:id])
-        end
+    def autenticar_usuario
+      @usuario_actual = Usuario.find_by_id(session[:id_usuario_actual])
+      redirect_to login_path unless @usuario_actual
     end
 
-    def new
-        @usuario_actual = Administrador.find_by_id(session[:id_usuario_actual])
-        if @usuario_actual
-            @evento = Evento.new
-            @evento.administrador = @usuario_actual
-        else
-            redirect_to eventos_path
-        end
+    def autorizar_administrador
+      redirect_to eventos_path unless @usuario_actual.type == "Administrador"
     end
-
-    def create
-        @usuario_actual = Administrador.find_by_id(session[:id_usuario_actual])
-        @evento = Evento.new(evento_params)
-        @evento.administrador = @usuario_actual
-
-        if @usuario_actual && @evento.save
-            redirect_to eventos_path
-        elsif @usuario_actual
-            render 'new'
-        else
-            redirect_to eventos_path
-        end
-    end
-
-    def edit
-        @evento = Evento.find_by_id(params[:id])
-    end
-
-    def update
-        @evento = Evento.find_by_id(params[:id])
-        if @evento.update_attributes(evento_params)
-            redirect_to eventos_path
-        else 
-            render 'edit' 
-        end
-    end
-
-    def destroy
-        @usuario_actual = Administrador.find_by_id(session[:id_usuario_actual])
-        evento = Evento.find_by_id(params[:id])
-        if @usuario_actual
-            evento.destroy
-        end
-        redirect_to eventos_path
-    end
-
-    def inscribir
-        evento = Evento.find_by_id(params[:id])
-        usuario_actual = Participante.find_by_id(session[:id_usuario_actual])
-
-        if usuario_actual && evento && evento.lugares_disponibles > 0
-            evento.participantes << usuario_actual
-        end
-        redirect_to evento_path(evento)
-    end
-    
-    private
-        def evento_params
-            params.require(:evento).permit(:nombre, :lugar, :maxParticipantes, :fechaInicio, :fechaFin, :descripcion)
-        end
 end
