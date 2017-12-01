@@ -1,6 +1,13 @@
 <div class="container">
     <div class="row">
         <div class='col-xs-6 col-xs-offset-3'>
+            <% if @evento.errors.any? %>
+                <p>    
+                    <% @evento.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                    <% end %>
+                </p></br>
+            <% end %>
           <%= form_for(@evento) do |f| %>
             <div class="form-group">
               <%= f.label :nombre %>
@@ -41,24 +48,34 @@
                 </div></br>
             </div>
             
-            <%= f.submit "Submit", class: "btn btn-default"%></br>
+            <%= f.submit "Guardar", class: "btn btn-primary", data: { confirm: "¿Guardar modificaciones?" } %></br>
           <% end %>
           
-          
-            <%= button_to "Eliminar", evento_path(@evento), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger"  %>
+            <%= button_to "Cancelar", eventos_path, method: :get, class: "btn" %>
+            <%= button_to "Eliminar", evento_path(@evento), method: :delete, data: { confirm: "¿Estás seguro que lo quieres eliminar?" }, class: "btn btn-danger"  %>
             
         </div>
         <script type="text/javascript">
             $(function () {
                 $('#datetimepicker1').datetimepicker({
                   locale: 'es',
-                  format: 'YYYY/MM/DD HH:mma'
+                  format: 'YYYY/MM/DD HH:mma',
+                  minDate: new Date()
                   });
 
                 $('#datetimepicker2').datetimepicker({
                   locale: 'es',
-                  format: 'YYYY/MM/DD HH:mma'
+                  format: 'YYYY/MM/DD HH:mma',
+                  minDate: $('#datetimepicker1').data("DateTimePicker").date(),
+                  useCurrent: false
                   });
+
+                $("#datetimepicker1").on("dp.change", function (e) {
+                    $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
+                });
+                $("#datetimepicker2").on("dp.change", function (e) {
+                    $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
+                });
             });
         </script>
     </div>

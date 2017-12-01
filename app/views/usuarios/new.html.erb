@@ -1,7 +1,13 @@
 <div class="modal-dialog">
 				<div class="loginmodal-container">
 					<h1>¡Regístrate ahora!</h1><br>
-
+                  <% if @usuario && @usuario.errors.any? %>
+                        <p>
+                        <% @usuario.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                        <% end %>
+                        </p></br>
+                    <% end %>
                   <%= form_for(@usuario) do |f| %>
                     <div class="field">
                     <%= f.text_field :nombre, placeholder: "Nombre", autofocus: true %>
@@ -31,6 +37,10 @@
 			</div>
 
 			<style>
+      html {
+                width: 100%;
+                height: 100%;
+            }
 			body{
   background-image: url('https://static.pexels.com/photos/5156/people-eiffel-tower-lights-night.jpg');
   background-repeat: no-repeat;

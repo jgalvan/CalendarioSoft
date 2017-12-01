@@ -4,11 +4,13 @@ class UsuariosController < ApplicationController
     end
 
     def iniciar_sesion
-        usuario = Usuario.where(email: params[:email], contrasena: params[:contrasena]).first
-        if usuario
-            session[:id_usuario_actual] = usuario.id
+        @usuario = Usuario.where(email: params[:usuario][:email], contrasena: params[:usuario][:contrasena]).first
+        if @usuario
+            session[:id_usuario_actual] = @usuario.id
             redirect_to eventos_path
         else
+            @usuario = Usuario.new(email: params[:usuario][:email])
+            @usuario.errors[:base] << "Correo o contraseña no válidos"
             render 'login'
         end
     end
@@ -23,6 +25,7 @@ class UsuariosController < ApplicationController
 
     def create
         @usuario = Usuario.new(usuario_params)
+        @usuario.type = "Participante"
         if @usuario.save
             session[:id_usuario_actual] = @usuario.id
             redirect_to eventos_path

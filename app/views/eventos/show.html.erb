@@ -36,7 +36,8 @@
           <% elsif @evento.lugares_disponibles > 0 %>
             <%= link_to "Inscribirme", inscribir_evento_path(@evento), method: :post %>
           <% end%>
-            
+          
+          <%= link_to "Regresar", eventos_path %>
         </div>
     </div>
 </div>

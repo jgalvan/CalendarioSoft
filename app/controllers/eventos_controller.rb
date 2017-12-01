@@ -29,7 +29,9 @@ class EventosController < ApplicationController
         @evento.administrador = @usuario_actual
 
         if @usuario_actual && @evento.save
-            redirect_to eventos_path
+            redirect_to evento_path(@evento)
+        elsif @usuario_actual
+            render 'new'
         else
             redirect_to eventos_path
         end
@@ -44,7 +46,7 @@ class EventosController < ApplicationController
         if @evento.update_attributes(evento_params)
             redirect_to eventos_path
         else 
-            edit_evento_path(params[:id])    
+            render 'edit' 
         end
     end
 

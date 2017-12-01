@@ -1,32 +1,46 @@
 <div class="modal-dialog">
 				<div class="loginmodal-container">
 					<h1>¡Inicia sesión!</h1><br>
-
-                    <%= form_tag iniciar_sesion_path, method: :post %>
+                    <% if @usuario && @usuario.errors.any? %>
+                        <p>
+                        <% @usuario.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                        <% end %>
+                        </p></br>
+                    <% end %>
+                    <%= form_for :usuario, url: iniciar_sesion_path, method: :post do |f| %>
                     <div class="field">
-                        <%= text_field_tag :email, nil, placeholder: "Email", autofocus: true %>
+                        <%= f.text_field :email, placeholder: "Email", autofocus: true %>
                     </div>
 
                     <div class="field">
-                        <%= password_field_tag :contrasena, nil, placeholder: "Contraseña", autocomplete: "off" %>
+                        <%= f.password_field :contrasena, placeholder: "Contraseña", autocomplete: "off" %>
                     </div>
 
 
                     <div class="actions">
-                        <%= submit_tag "Log in", class:"login loginmodal-submit" %>
+                        <%= f.submit "Log in", class:"login loginmodal-submit" %>
                     </div>
 					
 				  <div class="login-help">
 					<%= link_to "Regístrate", new_usuario_path %>
+                    <% end %>
 				  </div>
 				</div>
 			</div>
 
 			<style>
+            html {
+                width: 100%;
+                height: 100%;
+            }
 			body{
-  background-image: url('https://static.pexels.com/photos/5156/people-eiffel-tower-lights-night.jpg');
+  background: url('https://static.pexels.com/photos/5156/people-eiffel-tower-lights-night.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  width:100%; 
+  height:100%;
+  object-fit: cover;
   font-family: 'Source Sans Pro', sans-serif;
 }
 </style>

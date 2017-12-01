@@ -30,4 +30,28 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  date: 
+    month_names: [~, Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre]
+    abbr_month_names: [~, Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic]
+    day_names: [~, domingo, lunes, martes, miércoles, jueves, viernes, sábado]
+  simple_calendar: 
+    previous: "Anterior"
+    next: "Siguiente"
+  activerecord:
+    attributes:
+      usuario:
+        email: "E-mail"
+      evento:
+        descripcion: "Descripción"
+        maxParticipantes: "Capacidad de participantes"
+        fechaFin: "Fecha de fin"
+        fechaInicio: "Fecha de inicio"
+    errors:
+      messages:
+        blank: "no puede ser dejado en blanco."
+        not_a_number: "debe ser un número."
+        not_an_integer: "debe ser un número entero."
+      models: 
+        evento:
+          futura: "debe ser en el futuro."
+          fin_despues_incio: "debe ser después de la fecha de inicio."

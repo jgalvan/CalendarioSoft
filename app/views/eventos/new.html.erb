@@ -1,6 +1,14 @@
 <div class="container">
     <div class="row">
         <div class='col-xs-6 col-xs-offset-3'>
+            <% if @evento.errors.any? %>
+                <p>    
+                    <% @evento.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                    <% end %>
+                </p></br>
+            <% end %>
+
           <%= form_for(@evento) do |f| %>
             <div class="form-group">
               <%= f.label :nombre %>
@@ -40,8 +48,8 @@
                     </span>
                 </div></br>
             </div>
-            
-            <%= f.submit "Submit", class: "btn btn-default"%>
+            <%= link_to "Cancelar", eventos_path, class: "btn btn-default"%>
+            <%= f.submit "Guardar", class: "btn btn-primary"%>
           <% end %>
           
 
@@ -51,13 +59,23 @@
             $(function () {
                 $('#datetimepicker1').datetimepicker({
                   locale: 'es',
-                  format: 'YYYY/MM/DD HH:mma'
+                  format: 'YYYY/MM/DD HH:mma',
+                  minDate: new Date()
                   });
 
                 $('#datetimepicker2').datetimepicker({
                   locale: 'es',
-                  format: 'YYYY/MM/DD HH:mma'
+                  format: 'YYYY/MM/DD HH:mma',
+                  minDate: $('#datetimepicker1').data("DateTimePicker").date(),
+                  useCurrent: false
                   });
+
+                $("#datetimepicker1").on("dp.change", function (e) {
+                    $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
+                });
+                $("#datetimepicker2").on("dp.change", function (e) {
+                    $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
+                });
             });
         </script>
     </div>
