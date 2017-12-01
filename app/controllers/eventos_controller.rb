@@ -4,8 +4,8 @@ class EventosController < ApplicationController
     end
 
     def show
-        usuario_actual = Usuario.find_by_id(session[:id_usuario_actual])
-        if usuario_actual.type == "Administrador"
+        @usuario_actual = Usuario.find_by_id(session[:id_usuario_actual])
+        if @usuario_actual.type == "Administrador"
             redirect_to edit_evento_path(params[:id])
         else
             @evento = Evento.find_by_id(params[:id])
@@ -54,6 +54,16 @@ class EventosController < ApplicationController
             evento.destroy
         end
         redirect_to eventos_path
+    end
+
+    def inscribir
+        evento = Evento.find_by_id(params[:id])
+        usuario_actual = Participante.find_by_id(session[:id_usuario_actual])
+
+        if usuario_actual && evento && evento.lugares_disponibles > 0
+            evento.participantes << usuario_actual
+        end
+        redirect_to evento_path(evento)
     end
     
     private

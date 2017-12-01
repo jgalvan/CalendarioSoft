@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :eventos
+  resources :eventos do
+    post :inscribir, on: :member
+  end
 
 
   get '/login', to: 'usuarios#login', as: 'login'

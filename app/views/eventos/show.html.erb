@@ -28,10 +28,14 @@
 
           <div class="form-group">
             <label>Lugares disponibles</label>
-            <p><%= @evento.maxParticipantes %></p>
+            <p><%= @evento.lugares_disponibles %></p>
           </div>
 
-          <%= link_to "Inscribirme", "/" %>
+          <% if @evento.participantes.include?(@usuario_actual) %>
+            <p>¡Ya estás inscrito!</p>
+          <% elsif @evento.lugares_disponibles > 0 %>
+            <%= link_to "Inscribirme", inscribir_evento_path(@evento), method: :post %>
+          <% end%>
             
         </div>
     </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171121000329) do
+ActiveRecord::Schema.define(version: 20171201174148) do
 
   create_table "eventos", force: :cascade do |t|
     t.string "nombre"
@@ -23,6 +23,15 @@ ActiveRecord::Schema.define(version: 20171121000329) do
     t.datetime "fechaInicio"
     t.datetime "fechaFin"
     t.index ["administrador_id"], name: "index_eventos_on_administrador_id"
+  end
+
+  create_table "participacions", force: :cascade do |t|
+    t.integer "evento_id"
+    t.integer "usuario_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["evento_id"], name: "index_participacions_on_evento_id"
+    t.index ["usuario_id"], name: "index_participacions_on_usuario_id"
   end
 
   create_table "retroalimentacions", force: :cascade do |t|
