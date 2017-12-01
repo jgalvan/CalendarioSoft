@@ -1,3 +1,7 @@
+<% if @usuario_actual.try(:type) == "Administrador" %>
+  <%= link_to "Agregar evento", new_evento_path, class: "btn btn-primary" %>
+<% end %>
+
 <%= month_calendar attribute: :fechaInicio, end_attribute: :fechaFin, events: @eventos do |date, eventos| %>
   <%= date.day %>
 

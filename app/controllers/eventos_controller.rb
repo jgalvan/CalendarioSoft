@@ -1,6 +1,7 @@
 class EventosController < ApplicationController
     def index
         @eventos = Evento.all
+        @usuario_actual = Usuario.find_by_id(session[:id_usuario_actual])
     end
 
     def show
@@ -13,21 +14,21 @@ class EventosController < ApplicationController
     end
 
     def new
-        usuario_actual = Administrador.find_by_id(session[:id_usuario_actual])
-        if usuario_actual
+        @usuario_actual = Administrador.find_by_id(session[:id_usuario_actual])
+        if @usuario_actual
             @evento = Evento.new
-            @evento.administrador = usuario_actual
+            @evento.administrador = @usuario_actual
         else
             redirect_to eventos_path
         end
     end
 
     def create
-        usuario_actual = Administrador.find_by_id(session[:id_usuario_actual])
+        @usuario_actual = Administrador.find_by_id(session[:id_usuario_actual])
         @evento = Evento.new(evento_params)
-        @evento.administrador = usuario_actual
+        @evento.administrador = @usuario_actual
 
-        if usuario_actual && @evento.save
+        if @usuario_actual && @evento.save
             redirect_to eventos_path
         else
             redirect_to eventos_path
@@ -48,9 +49,9 @@ class EventosController < ApplicationController
     end
 
     def destroy
-        usuario_actual = Administrador.find_by_id(session[:id_usuario_actual])
+        @usuario_actual = Administrador.find_by_id(session[:id_usuario_actual])
         evento = Evento.find_by_id(params[:id])
-        if usuario_actual
+        if @usuario_actual
             evento.destroy
         end
         redirect_to eventos_path
