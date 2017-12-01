@@ -20,11 +20,13 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
           <% if @usuario_actual %>
-            <li>
-              <%= link_to new_evento_path  do %>
-                <span class="glyphicon glyphicon-plus"></span> Agregar evento
-              <% end %>
-            </li>
+            <% if @usuario_actual.type == "Administrador" %>
+              <li>
+                <%= link_to new_evento_path  do %>
+                  <span class="glyphicon glyphicon-plus"></span> Agregar evento
+                <% end %>
+              </li>
+            <% end %>
             <li>
               <%= link_to eventos_path  do %>
                 <span class="glyphicon glyphicon-calendar"></span> Calendario
