@@ -29,7 +29,7 @@ class EventosController < ApplicationController
         @evento.administrador = @usuario_actual
 
         if @usuario_actual && @evento.save
-            redirect_to evento_path(@evento)
+            redirect_to eventos_path
         elsif @usuario_actual
             render 'new'
         else
